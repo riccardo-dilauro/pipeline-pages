@@ -1,0 +1,21 @@
+on: #eseguita quando pusha su master
+  push:
+    branches: [master]
+
+permissions:
+  contents: read #Diamo autorizzazione a leggere contenuti della repo
+  pages: write 
+  id-token: write
+
+jobs: 
+  deploy:
+    runs-on: ubuntu-latest
+    environment: 
+      name: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          patch: .
+      - uses: actions/deploy/pages@v4  
+    
